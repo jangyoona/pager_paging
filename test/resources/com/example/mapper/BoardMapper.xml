@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+	<!-- namespace : 패키지이름.클래스이름 ( 저장된 경로와 일치하도록 작성 ) Dao에서 쓸 때 이 경로 꼭 정확히 매칭하셈 -->
+	<mapper namespace="com.example.mapper.BoardMapper">
+	
+	<select id="findAll" parameterType="map" resultType="BoardDto">
+		SELECT
+			id, boardWriter, boardPass, boardTitle, boardContents, boardHits, boardCreatedTime
+		FROM
+			board
+		ORDER BY
+			id DESC
+		LIMIT
+			#{start}, #{limit}
+	</select>
+	
+	<select id="countBoard" resultType="int">
+		SELECT
+			count(id)
+		FROM
+			board
+	</select>
+	
+	
+	
+	<insert id="save" parameterType="BoardDto">
+		INSERT INTO
+			board (boardWriter, boardPass, boardTitle, boardContents)
+		VALUES
+			(#{boardWriter}, #{boardPass}, #{boardTitle}, #{boardContents})
+	</insert>
+	
+	<select id="findById" parameterType="long" resultType="BoardDto">
+		SELECT
+			id, boardWriter, boardPass, boardTitle, boardContents, boardHits, boardCreatedTime
+		FROM
+			board
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="updateHits" parameterType="long">
+		UPDATE
+			board
+		SET
+			boardHits = boardHits + 1
+		WHERE
+			id = ${id}
+	</update>
+	
+	<delete id="deleteById" parameterType="long">
+		DELETE
+			FROM board
+		WHERE
+			id = ${id}
+	</delete>
+	
+	<update id="updateById" parameterType="BoardDto">
+		UPDATE
+			board
+		SET
+			boardTitle = #{boardTitle}
+		,	boardContents = #{boardContents}
+		WHERE
+			id = #{id}
+	</update>
+
+	</mapper>
