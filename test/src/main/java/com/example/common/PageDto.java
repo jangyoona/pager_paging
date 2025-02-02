@@ -16,13 +16,12 @@ public class PageDto {
 	
 	
 	// 게시물 SELECT용 생성자 (페이지 번호, 한 페이지에 표시할 게시물 갯수, 한 페이지 페이징 보여줄 갯수)
-	public PageDto(int pageNo, int pageLimit, int blockLimit) {
+	public PageDto(int pageNo, int pageLimit) {
 		// 1. 초기화
 		// 2. getPageStart, getPageLimit를 Limit 절에 넣기 | 예시) Limit #{getPageStart}, #{getPageLimit}
 		pageStart = (pageNo -1) * pageLimit;
 		
 		this.pageLimit = pageLimit;
-		this.blockLimit = blockLimit;
 	}
 	
 	// pager 생성자 (페이지 번호, 게시물 총 갯수, 한 페이지에 표시할 게시물 갯수, 한 페이지에 표시할 페이저 갯수)

@@ -21,7 +21,7 @@ public class BoardService {
 	}
 
 	public List<BoardDto> findAll(int pageNo) {
-		PageDto pager = new PageDto(pageNo, 3, 3);
+		PageDto pager = new PageDto(pageNo, 3);
 		return boardMapper.findAll(pager.getPageStart(), pager.getPageLimit());
 	}
 
